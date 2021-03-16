@@ -1,11 +1,10 @@
 import json
 
-from flask import Flask, request, jsonify
+from flask import request, jsonify
 
 from models.parametros_busca_celular import ParametrosBuscaCelulares
+from routes.__init__ import app
 from services.buscar_celulares import buscar_celulares
-
-app = Flask(__name__)
 
 
 @app.route('/buscar-celulares', methods=["POST"])
@@ -16,5 +15,6 @@ def tratar_busca_celular():
 
     resultado = buscar_celulares(parametros_da_busca)
 
-    return jsonify(resultado)
+    resposta = json.dumps([celular.__dict__ for celular in resultado])
 
+    return jsonify(json.loads(resposta)), 200
