@@ -1,26 +1,26 @@
 class ParametrosBuscaCelulares():
-    potencia: str
+    desempenho: str
     armazenamento: str
-    tamanho: str
-    qualidadeTela: str
+    tamanho_tela: str
+    qualidade_tela: str
     camera: str
     bateria: str
-    preco: float
+    preco_maximo: float
 
     def __init__(
             self,
-            potencia: str,
+            desempenho: str,
             armazenamento: str,
-            tamanho: str,
-            qualidadeTela: str,
+            tamanho_tela: str,
+            qualidade_tela: str,
             camera: str,
             bateria: str,
-            preco: float
+            preco_maximo: float
     ):
-        self.potencia = potencia
+        self.desempenho = desempenho
         self.armazenamento = armazenamento
-        self.tamanho = tamanho
-        self.qualidadeTela = qualidadeTela
+        self.tamanho_tela = tamanho_tela
+        self.qualidade_tela = qualidade_tela
         self.camera = camera
         self.bateria = bateria
-        self.preco = preco
+        self.preco_maximo = preco_maximo

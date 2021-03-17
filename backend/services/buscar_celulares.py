@@ -5,18 +5,21 @@ from models.parametros_busca_celular import ParametrosBuscaCelulares
 
 def buscar_celulares(parametros_da_busca: ParametrosBuscaCelulares):
     connection = get_connection()
-    resultado = connection.execute("select "
-                                       "c.modelo, "
-                                       "c.desempenho, "
-                                       "c.armazenamento, "
-                                       "c.tamanho_tela, "
-                                       " c.qualidade_tela, "
-                                       "c.camera,c.bateria, "
-                                       "c.preco, "
-                                       "c.imagem, "
-                                       "c.link_compra"
-                                   " from celular c "
-                                   "where c.modelo = 'Iphone 12'")
+    sql = f"""SELECT 
+                c.modelo,
+                c.preco,
+                c.imagem,
+                c.link_compra
+            FROM celular c
+            WHERE c.desempenho >= {parametros_da_busca.desempenho}
+            AND c.armazenamento >= {parametros_da_busca.armazenamento}
+            AND c.tamanho_tela >= {parametros_da_busca.tamanho_tela}
+            AND c.qualidade_tela >= {parametros_da_busca.qualidade_tela}
+            AND c.camera >= {parametros_da_busca.camera}
+            AND c.bateria >= {parametros_da_busca.bateria}
+            AND c.preco <= {parametros_da_busca.preco_maximo}
+    """
+    resultado = connection.execute(sql)
     celulares = []
     for row in resultado:
         celular_model = CelularModel(**row)
